@@ -47,8 +47,11 @@ public class FileDownloadActivity extends BaseDetailActivity {
         ButterKnife.bind(this);
         setTitle("文件下载");
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},111);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this
+                    , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}
+                    , 111);
         }
     }
 
@@ -61,10 +64,10 @@ public class FileDownloadActivity extends BaseDetailActivity {
 
     @OnClick(R.id.fileDownload)
     public void fileDownload(View view) {
-        OkHttpUtils.get(Urls.URL_DOWNLOAD)//
+        OkHttpUtils.get("https://tfiles.top1buyer.com/20200427133850858.apk")//
                 .tag(this)//
-                .headers("header1", "headerValue1")//
-                .params("param1", "paramValue1")//
+//                .headers("header1", "headerValue1")//
+//                .params("param1", "paramValue1")//
                 .execute(new FileCallback("OkHttpUtils.apk") {
                     @Override
                     public void onBefore(BaseRequest request) {

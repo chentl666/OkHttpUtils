@@ -4,13 +4,7 @@
 
 ### 封装了okhttp的网络框架，支持大文件上传下载，上传进度回调，下载进度回调，表单上传（多文件和多参数一起上传），链式调用，可以自定义返回对象，支持Https和自签名证书，支持cookie自动管理，支持四种缓存模式缓存网络数据，支持301、302重定向，扩展了统一的上传管理和下载管理功能
 
-该项目参考了以下项目：
 
- * [https://github.com/hongyangAndroid/okhttp-utils](https://github.com/hongyangAndroid/okhttp-utils)  
- * [https://github.com/yanzhenjie/NoHttp](https://github.com/Y0LANDA/NoHttp) 
- * [https://github.com/wyouflf/xUtils](https://github.com/wyouflf/xUtils) 
-
-在此特别感谢上述作者，喜欢原作的可以去使用原项目。同时欢迎大家下载体验本项目，如果使用过程中遇到什么问题，欢迎反馈。
 
 
 ## 1.用法
@@ -514,4 +508,10 @@ execute方法不传入callback即为同步的请求，返回`Response`对象，�
     -keep class okio.**{*;}
 ```
 
+该项目参考了以下项目：
 
+ * [https://github.com/hongyangAndroid/okhttp-utils](https://github.com/hongyangAndroid/okhttp-utils)
+ * [https://github.com/yanzhenjie/NoHttp](https://github.com/Y0LANDA/NoHttp)
+ * [https://github.com/wyouflf/xUtils](https://github.com/wyouflf/xUtils)
+
+在此特别感谢上述作者，喜欢原作的可以去使用原项目。同时欢迎大家下载体验本项目，如果使用过程中遇到什么问题，欢迎反馈。

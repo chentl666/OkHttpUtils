@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.lzy.okhttpdemo"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "4g"     //增加java堆内存大小
+        maxProcessCount 100   //Dex的最大并发进程数。默认为4。
+        jumboMode true
+        threadCount 100       ////dx运行时使用的线程的数量。默认4个
+        keepRuntimeAnnotatedClasses false
+    }
+    lintOptions {
+        abortOnError false
+        warningsAsErrors false
+        check "NewApi"
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v2.0.7'
+    implementation 'com.github.bumptech.glide:glide:3.6.1'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'com.lzy.widget:ninegridview:0.2.0'
+    implementation 'com.lzy.widget:imagepicker:0.3.2'
+    implementation 'com.lzy.widget:view-core:0.2.1'
+
+    //    compile 'com.lzy.net:okhttputils:+'
+    //    compile 'com.lzy.net:okhttpserver:+'
+    implementation project(':okhttputils')
+    implementation project(':okhttpserver')
+}

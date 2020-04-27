@@ -24,8 +24,7 @@
 
 
 ```
-    implementation 'com.github.chentl666:okhttputils:1.0.0'  //可以单独使用，不需要依赖下方的扩展包
-	implementation 'com.github.chentl666:okhttpserver:1.0.0' //扩展了下载管理和上传管理，根据需要添加
+    implementation 'com.github.chentl666:OkHttpUtils:1.0.0'
 
 ```
 

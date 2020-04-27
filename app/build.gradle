@@ -58,8 +58,7 @@ dependencies {
     implementation 'com.lzy.widget:imagepicker:0.3.2'
     implementation 'com.lzy.widget:view-core:0.2.1'
 
-    //    compile 'com.lzy.net:okhttputils:+'
-    //    compile 'com.lzy.net:okhttpserver:+'
-    implementation project(':okhttputils')
-    implementation project(':okhttpserver')
+    implementation 'com.github.chentl666:OkHttpUtils:1.0.0'
+//    implementation project(':okhttputils')
+//    implementation project(':okhttpserver')
 }

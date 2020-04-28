@@ -1,6 +1,7 @@
 package com.lzy.okhttputils.callback;
 
 import android.os.Environment;
+import android.os.SystemClock;
 import android.text.TextUtils;
 
 import com.lzy.okhttputils.OkHttpUtils;
@@ -40,8 +41,10 @@ public abstract class FileCallback extends AbsCallback<File> {
     }
 
     private File saveFile(Response response) throws IOException {
-        if (TextUtils.isEmpty(destFileDir)) destFileDir = Environment.getExternalStorageDirectory() + DM_TARGET_FOLDER;
-        if (TextUtils.isEmpty(destFileName)) destFileName = HttpUtils.getNetFileName(response, response.request().url().toString());
+        if (TextUtils.isEmpty(destFileDir))
+            destFileDir = Environment.getExternalStorageDirectory() + DM_TARGET_FOLDER;
+        if (TextUtils.isEmpty(destFileName))
+            destFileName = HttpUtils.getNetFileName(response, response.request().url().toString());
 
         File dir = new File(destFileDir);
         if (!dir.exists()) dir.mkdirs();
@@ -65,9 +68,9 @@ public abstract class FileCallback extends AbsCallback<File> {
                 fos.write(buf, 0, len);
                 final long finalSum = sum;
 
-                long curTime = System.currentTimeMillis();
+                long curTime = SystemClock.elapsedRealtime();
                 //每200毫秒刷新一次数据
-                if (curTime - lastRefreshUiTime >= 200 || finalSum == total) {
+                if (curTime - lastRefreshUiTime > 200 || finalSum == total) {
                     //计算下载速度
                     long diffTime = (curTime - lastRefreshUiTime) / 1000;
                     if (diffTime == 0) diffTime += 1;
@@ -80,7 +83,7 @@ public abstract class FileCallback extends AbsCallback<File> {
                         }
                     });
 
-                    lastRefreshUiTime = System.currentTimeMillis();
+                    lastRefreshUiTime = curTime;
                     lastWriteBytes = finalSum;
                 }
             }

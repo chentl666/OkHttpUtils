@@ -51,11 +51,11 @@ public abstract class FileCallback extends AbsCallback<File> {
         File file = new File(dir, destFileName);
         if (file.exists()) file.delete();
 
-        long lastRefreshUiTime = 0;  //最后一次刷新的时间
+        long lastRefreshUiTime = SystemClock.elapsedRealtime();  //最后一次刷新的时间
         long lastWriteBytes = 0;     //最后一次写入字节数据
 
         InputStream is = null;
-        byte[] buf = new byte[2048];
+        byte[] buf = new byte[8192];
         FileOutputStream fos = null;
         try {
             is = response.body().byteStream();
@@ -73,7 +73,7 @@ public abstract class FileCallback extends AbsCallback<File> {
                 if (curTime - lastRefreshUiTime > 200 || finalSum == total) {
                     //计算下载速度
                     long diffTime = (curTime - lastRefreshUiTime) / 1000;
-                    if (diffTime == 0) diffTime += 1;
+                    if (diffTime == 0) diffTime = 1;
                     long diffBytes = finalSum - lastWriteBytes;
                     final long networkSpeed = diffBytes / diffTime;
                     OkHttpUtils.getInstance().getDelivery().post(new Runnable() {
